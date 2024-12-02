@@ -1,7 +1,7 @@
 moonboot
 ========
 
-This is an R package for m-out-of-n bootstrap that priovides functions for
+This is an R package for m-out-of-n bootstrap that provides functions for
 
 - computation of confidence intervals
 - estimation of the scaling factor tau
@@ -34,12 +34,12 @@ e.g., for a root-n consistent estimator:
 Installation
 ------------
 
-If you have cloned the repository to the directory *moonbot*, you can install
+If you have cloned the repository to the directory *moonboot*, you can install
 it with
 
     R CMD INSTALL moonboot
 
-If you have downloaded a file release *moonbot-X.Y.Z.tar.gz*, you can install
+If you have downloaded a file release *moonboot-X.Y.Z.tar.gz*, you can install
 it with
 
     R CMD INSTALL moonboot-X.Y.Z.tar.gz
