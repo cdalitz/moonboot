@@ -42,7 +42,7 @@ it with
 If you have downloaded a file release *moonbot-X.Y.Z.tar.gz*, you can install
 it with
 
-   R CMD INSTALL moonbot-X.Y.Z.tar.gz
+    R CMD INSTALL moonbot-X.Y.Z.tar.gz
 
 
 Authors & Copyright
