@@ -18,7 +18,7 @@ A typical usage is
     }
 
     # apply m-out-of-n bootstrap
-    boot.out <- mboot(x, boot.stat, m=sqrt(length(x)))
+    boot.out <- mboot(x, boot.stat, m=2*sqrt(length(x)))
 
     # compute 95% confidence interval
     ci <- mboot.ci(boot.out, type="basic")
@@ -33,6 +33,16 @@ e.g., for a root-n consistent estimator:
 
 Installation
 ------------
+
+If you have cloned the repository to the directory *moonbot*, you can install
+it with
+
+    R CMD INSTALL moonboot
+
+If you have downloaded a file release *moonbot-X.Y.Z.tar.gz*, you can install
+it with
+
+   R CMD INSTALL moonbot-X.Y.Z.tar.gz
 
 
 Authors & Copyright
