@@ -1,0 +1,16 @@
+citHeader("To cite the 'moonboot' package in publications use:")
+version <- "version 0.0.0.9000"
+year = "2024"
+citEntry(entry = "manual",
+    title = "moonboot",
+    author = c(person("Christoph", "Dalitz"), person("Felix", "Lögler")),
+    organization = "Niederrhein University of Applied Sciences, Institute for Pattern Recognition",
+    address = "Reinarzstr. 49, 47805 Krefeld, Germany",
+    note = version,
+    year = year,
+    url = "https://github.com/cdalitz/moonboot/",
+    textVersion  = paste("C. Dalitz, F. Lögler (",year,").",
+        "moonboot:",
+        version," Niederrhein University of Applied Sciences, Institute for Pattern Recognition. Reinarzstr. 49, 47805 Krefeld, Germany.",
+        "https://github.com/cdalitz/moonboot/", sep = " ")
+)
