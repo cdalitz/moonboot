@@ -9,8 +9,8 @@ citEntry(entry = "manual",
     note = version,
     year = year,
     url = "https://github.com/cdalitz/moonboot/",
-    textVersion  = paste("C. Dalitz, F. Lögler (",year,").",
-        "moonboot:",
-        version," Niederrhein University of Applied Sciences, Institute for Pattern Recognition. Reinarzstr. 49, 47805 Krefeld, Germany.",
-        "https://github.com/cdalitz/moonboot/", sep = " ")
+    textVersion  = paste("C. Dalitz, F. Lögler (",year,"). ",
+        "moonboot: ",
+        version," Niederrhein University of Applied Sciences, Institute for Pattern Recognition. Reinarzstr. 49, 47805 Krefeld, Germany. ",
+        "https://github.com/cdalitz/moonboot/", sep = "")
 )

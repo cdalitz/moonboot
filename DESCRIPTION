@@ -3,7 +3,7 @@ Title: m-Out-of-n Bootstrap Functions
 Version: 0.0.0.9000
 Date: 2024-11-22
 Authors@R:
-    c(person("Christoph", "Dalitz", email="christoph.dalitz@hs-niederrhein.de", role = c("aut", "cre", "cph")),person("Felix", "Lögler", role = c("aut")))
+    c(person("Christoph", "Dalitz", email="christoph.dalitz@hs-niederrhein.de", role = c("aut", "cre")),person("Felix", "Lögler", role = c("aut")))
 Description:
   Functions and examples based on the m-out-of-n bootstrap suggested by Politis and Romano (1994).
   Additionally there are functions to estimate the convergence rate tau and the subsampling size m.
