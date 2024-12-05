@@ -251,7 +251,7 @@ estimate.m <- function(data, statistic, tau = NULL, R = 1000, replace = FALSE, m
   }else if ("politis" == method) {
     return(estimate.m.politis(data, statistic, tau, R, replace, min.m, params, ...))
   }else if ("sherman" == method) {
-    estimate.m.sherman(data, statistic, R = R, replace = replace, min.m)
+    return(estimate.m.sherman(data, statistic, R = R, replace = replace, min.m, params, ...))
   }else {
     stop("unsupported method to estimate m")
   }
@@ -356,7 +356,7 @@ estimate.m.bickel <- function(data, statistic, tau, R, replace = FALSE, min.m, p
   return(m.distances[min.index, 1])
 }
 
-estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m = 2, params, ...) {
+estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, params, ...) {
 
   params.default.values <- list(h.sigma = 3, h.ci = 3, conf = 0.95)
 
@@ -479,7 +479,7 @@ estimate.tau <- function(data, statistic, R = 1000, replace = FALSE, min.m = 3, 
 }
 
 # Estimates tau using the variance method suggested by Bertail et al. (1999)
-estimate.tau.variance <- function(data, statistic, R = 1000, replace = FALSE, min.m = 3, beta = seq(0.2, 0.7, length.out = 5), ...) {
+estimate.tau.variance <- function(data, statistic, R = 1000, replace = FALSE, min.m, beta = seq(0.2, 0.7, length.out = 5), ...) {
   n <- NROW(data)
   beta <- pmin(1, pmax(0, beta)) # force them to be in bounds
   # b from the paper is called m for consistency with the rest of the code
@@ -496,7 +496,7 @@ estimate.tau.variance <- function(data, statistic, R = 1000, replace = FALSE, mi
 }
 
 # Estimate tau using the method suggested by Polits et al. (1999).
-estimate.tau.quantile <- function(data, statistic, R = 1000, replace = FALSE, min.m = 3, bs, ...) {
+estimate.tau.quantile <- function(data, statistic, R = 1000, replace = FALSE, min.m, bs, ...) {
   n <- NROW(data)
   J <- 5
   I <- 5
@@ -515,7 +515,7 @@ estimate.tau.quantile <- function(data, statistic, R = 1000, replace = FALSE, mi
   ms <- unique(ms)
   ms <- ms[ms >= min.m & ms <= n]
   I <- length(ms)
-  boot.outs <- lapply(ms, function(m) mboot(data, statistic, R = R, m = m, replace = replace))
+  boot.outs <- lapply(ms, function(m) mboot(data, statistic, R = R, m = m, replace = replace, ...))
 
   get.log.difference <- function(i, j) {
     # tau is set to 1 according to the formula

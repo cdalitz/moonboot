@@ -1,7 +1,7 @@
 # internal functions suggested by Sherman and Carlstein
 
 # double bootstrap approach to choose a m value
-estimate.m.sherman <- function(data, statistic, R = 1000, replace = FALSE, min.m = 2, params, ...) {
+estimate.m.sherman <- function(data, statistic, R = 1000, replace = FALSE, min.m, params, ...) {
   params.default.values <- list(beta = seq(0.3, 0.9, length.out = 15), conf = 0.95)
 
   if (!hasArg(params) | is.null(params)) {
@@ -24,7 +24,7 @@ estimate.m.sherman <- function(data, statistic, R = 1000, replace = FALSE, min.m
   ms <- unique(ms)
   ms <- ms[ms > min.m & ms < n]
   model.point.est <- statistic(data, 1:n)
-  cov.ps <- lapply(ms, function(m) sherman.estimate.covp(data, statistic, m, model.point.est, conf, R, replace = replace))
+  cov.ps <- lapply(ms, function(m) sherman.estimate.covp(data, statistic, m, model.point.est, conf, R, replace = replace,...))
   cov.ps <- as.numeric(unlist(cov.ps))
 
   # choose beta where two elements in a row are smaller than choosen threshold
@@ -40,7 +40,7 @@ estimate.m.sherman <- function(data, statistic, R = 1000, replace = FALSE, min.m
 
 
 # internal method to estimate the coverage probability for a choosen m value
-sherman.estimate.covp <- function(data, statistic, m, t0, conf, N, replace = FALSE) {
+sherman.estimate.covp <- function(data, statistic, m, t0, conf, N, replace = FALSE, ...) {
   n <- NROW(data)
   generator.replace <- TRUE
 
@@ -58,7 +58,7 @@ sherman.estimate.covp <- function(data, statistic, m, t0, conf, N, replace = FAL
   coverage.sum <- 0
   for (i in 1:N) {
     gen.data <- generator(data, n)
-    bout <- mboot(gen.data, statistic, m = m, R = 1000, replace = replace)
+    bout <- mboot(gen.data, statistic, m = m, R = 1000, replace = replace, ...)
     ci <- mboot.ci(bout, types = "sherman", conf = conf)$sherman
     coverage.sum <- coverage.sum + ifelse(t0 >= ci[1] & t0 <= ci[2], 1, 0)
   }
