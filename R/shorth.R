@@ -10,7 +10,7 @@
 #' @examples
 #' data <- rnorm(100)
 #' shorth(data)
-#' shorth(data, sample(1:100, size = 100))
+#' shorth(data, sample(1:100, size = 20))
 #'
 #' # Calculating a CI for shorth using [mboot()]
 #' data <- rnorm(100)
