@@ -37,7 +37,7 @@ Sampling can be done with or without replacement.
 The subsample size m can either be chosen directly or estimated with \code{\link[=estimate.m]{estimate.m()}}.
 }
 \details{
-\emph{m} needs to be a numeric value meeting the condition \emph{2<=m<=n}. If omitted, \emph{m} is set to \emph{sqrt(n)}.
+\code{m} needs to be a numeric value meeting the condition \code{2<=m<=n}. If omitted, \code{m} is set to \code{sqrt(n)}.
 The m-out-of-n Bootstrap without replacement, known as subsampling, was introduced by Politis and Romano (1994).
 }
 \examples{

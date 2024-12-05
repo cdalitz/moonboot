@@ -23,7 +23,7 @@
 #'
 #' @details
 #'
-#' \emph{m} needs to be a numeric value meeting the condition \emph{2<=m<=n}. If omitted, \emph{m} is set to \emph{sqrt(n)}.
+#' \code{m} needs to be a numeric value meeting the condition \code{2<=m<=n}. If omitted, \code{m} is set to \code{sqrt(n)}.
 #' The m-out-of-n Bootstrap without replacement, known as subsampling, was introduced by Politis and Romano (1994).
 #' @importFrom methods hasArg
 #' @export
@@ -68,11 +68,11 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 
 #' m-Out-of-n Bootstrap Confidence Intervals
 #'
-#' Estimates the confidence interval using the methods provided by \emph{types}.
-#' \emph{tau} must be a function that calculates \emph{tau.n} from its argument \emph{n}.
-#' If it is not provided, it is estimated with \emph{estimate.tau} using the default settings of this function.
+#' Estimates the confidence interval using the methods provided by \code{types}.
+#' \code{tau} must be a function that calculates \code{tau.n} from its argument \code{n}.
+#' If it is not provided, it is estimated with \code{estimate.tau} using the default settings of this function.
 #'
-#' @param boot.out The simulated bootstrap distribution from the \emph{mboot} call.
+#' @param boot.out The simulated bootstrap distribution from the \code{mboot} call.
 #' @param conf The confidence level.
 #' @param tau Function that returns its only argument applied to tau. If \code{NULL}, \code{estimate.tau} is used to estimate \code{tau}.
 #' @param types The types of confidence intervals to be calculated. The value can be 'all' for all types, or a

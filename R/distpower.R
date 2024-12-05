@@ -2,20 +2,20 @@
 #'
 #' Density, distribution function, quantile function and random
 #' generation for a continuous distribution with the density
-#' (pow+1)*(x-min)^pow for x in `[min,max]` and pow > -1.
+#' \code{(pow+1)*(x-min)^pow} for \code{x} in the range \code{[min,max]} and \code{pow > -1}.
 #' 
 #' @param x vector of values where to evaluate the denisty or CDF.
 #' @param p vector of probabilities.
 #' @param pow degree of the power law.
-#' @param n number of observations. If 'length(n) > 1', the length is taken to be the number reqired.
+#' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.
 #' @param min minimum value of the support of the distribution.
 #' @param max maximum value of the support of the distribution.
-#' @returns ‘dpower’ gives the density, ‘ppower’ gives the cumulative
-#' distribution function (CDF), ‘qpower’ gives the quantile function
-#' (i.e., the inverse of the CDF), and ‘rpower’ generates random numbers.
+#' @returns \code{dpower} gives the density, \code{ppower} gives the cumulative
+#' distribution function (CDF), \code{qpower} gives the quantile function
+#' (i.e., the inverse of the CDF), and \code{rpower} generates random numbers.
 #'
-#' The length of the result is determined by ‘n’ for ‘rpower’, and is
-#' the length of x or p for the other functions.
+#' The length of the result is determined by \code{n} for \code{rpower}, and is
+#' the length of \code{x} or \code{p} for the other functions.
 #' @name distPower
 NULL
 

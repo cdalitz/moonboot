@@ -27,18 +27,18 @@ rpower(n, pow, min = 0, max = 1)
 
 \item{p}{vector of probabilities.}
 
-\item{n}{number of observations. If 'length(n) > 1', the length is taken to be the number reqired.}
+\item{n}{number of observations. If \code{length(n) > 1}, the length is taken to be the number required.}
 }
 \value{
-‘dpower’ gives the density, ‘ppower’ gives the cumulative
-distribution function (CDF), ‘qpower’ gives the quantile function
-(i.e., the inverse of the CDF), and ‘rpower’ generates random numbers.
+\code{dpower} gives the density, \code{ppower} gives the cumulative
+distribution function (CDF), \code{qpower} gives the quantile function
+(i.e., the inverse of the CDF), and \code{rpower} generates random numbers.
 
-The length of the result is determined by ‘n’ for ‘rpower’, and is
-the length of x or p for the other functions.
+The length of the result is determined by \code{n} for \code{rpower}, and is
+the length of \code{x} or \code{p} for the other functions.
 }
 \description{
 Density, distribution function, quantile function and random
 generation for a continuous distribution with the density
-(pow+1)*(x-min)^pow for x in \verb{[min,max]} and pow > -1.
+\code{(pow+1)*(x-min)^pow} for \code{x} in the range \code{[min,max]} and \code{pow > -1}.
 }

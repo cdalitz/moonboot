@@ -7,7 +7,7 @@
 mboot.ci(boot.out, conf = 0.95, tau = NULL, types = "all", ...)
 }
 \arguments{
-\item{boot.out}{The simulated bootstrap distribution from the \emph{mboot} call.}
+\item{boot.out}{The simulated bootstrap distribution from the \code{mboot} call.}
 
 \item{conf}{The confidence level.}
 
@@ -22,9 +22,9 @@ subset of \code{c("basic", "norm", "sherman")}.}
 A list of confidence intervals for the given types.
 }
 \description{
-Estimates the confidence interval using the methods provided by \emph{types}.
-\emph{tau} must be a function that calculates \emph{tau.n} from its argument \emph{n}.
-If it is not provided, it is estimated with \emph{estimate.tau} using the default settings of this function.
+Estimates the confidence interval using the methods provided by \code{types}.
+\code{tau} must be a function that calculates \code{tau.n} from its argument \code{n}.
+If it is not provided, it is estimated with \code{estimate.tau} using the default settings of this function.
 }
 \details{
 The additional parameters are passed to the statistic function if \code{tau} was omitted.
