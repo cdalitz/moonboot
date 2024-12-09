@@ -108,7 +108,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
   if (conf > 1 | conf < 0)
     stop("conf must be between 0,1")
-  if (is.null(boot.out) || class(boot.out) != "mboot")
+  if (is.null(boot.out) || !inherits(boot.out, "mboot"))
     stop("you need to call mboot first")
 
   if ("all" %in% types)
