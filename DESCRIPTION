@@ -1,7 +1,7 @@
 Package: moonboot
 Title: m-Out-of-n Bootstrap Functions
-Version: 0.0.0.9000
-Date: 2024-11-22
+Version: 0.9.0
+Date: 2024-12-09
 Authors@R:
     c(person("Christoph", "Dalitz", email="christoph.dalitz@hs-niederrhein.de", role = c("aut", "cre")),person("Felix", "Lögler", role = c("aut")))
 Description:

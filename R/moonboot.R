@@ -30,7 +30,7 @@
 #' @examples
 #' data <- runif(1000)
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
-#' boot.out <- mboot(data, estimate.max, R = 1000, m = sqrt(length(data)), replace = FALSE)
+#' boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
 #'
 #' @seealso mboot.ci estimate.m estimate.tau
 #'
@@ -45,13 +45,9 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
   if (R <= 0)
     stop("R needs to be >0")
 
-  if (hasArg(m)) {
-    if (!is.numeric(m)) {
-      stop("m must be numeric. Use estimate.m to estimate m.")
-    }
+  if (!hasArg(m)) {
+    stop("m not provided")
   }
-  else
-    m <- sqrt(n)
   if (m > n || m < 2)
     stop("m must be in [2,n]")
 
@@ -239,7 +235,7 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
 #' @export
 
 estimate.m <- function(data, statistic, tau = NULL, R = 1000, replace = FALSE, min.m = 3, method = "bickel", params = NULL, ...) {
-  if(is.null(tau) & method != "sherman"){
+  if (is.null(tau) & method != "sherman") {
     tau <- estimate.tau(data, statistic, R = 1000, replace = FALSE, ...)
   }
 
@@ -251,7 +247,7 @@ estimate.m <- function(data, statistic, tau = NULL, R = 1000, replace = FALSE, m
   }else if ("politis" == method) {
     return(estimate.m.politis(data, statistic, tau, R, replace, min.m, params, ...))
   }else if ("sherman" == method) {
-    return(estimate.m.sherman(data, statistic, R = R, replace = replace, min.m, params, ...))
+    return(estimate.m.sherman(data, statistic, R, replace, min.m, params, ...))
   }else {
     stop("unsupported method to estimate m")
   }

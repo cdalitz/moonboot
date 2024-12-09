@@ -15,7 +15,6 @@ test_that("sherman double bootstrap", {
   max.statistic <- function(data, indices) {return(max(data[indices]))}
   data <- runif(10)
   estimated.m <- estimate.m(data, max.statistic, method = "sherman")
-  print(estimated.m)
   expect_lte(estimated.m, length(data))
-  expect_lte(estimated.m, 2)
+  expect_gte(estimated.m, 2)
 })
