@@ -1,16 +1,17 @@
 citHeader("To cite the 'moonboot' package in publications use:")
 version <- "version 0.9.0"
 year = "2024"
-citEntry(entry = "manual",
-    title = "moonboot",
+citEntry(entry = "misc",
+    title = "moonboot: An R Package Implementing m-out-of-n Bootstrap Methods",
     author = c(person("Christoph", "Dalitz"), person("Felix", "Lögler")),
-    organization = "Niederrhein University of Applied Sciences, Institute for Pattern Recognition",
-    address = "Reinarzstr. 49, 47805 Krefeld, Germany",
-    note = version,
     year = year,
-    url = "https://github.com/cdalitz/moonboot/",
+    eprint = "2412.05032",
+    archivePrefix = "arXiv",
+    primaryClass = "stat.ME",
+    url = "https://arxiv.org/abs/2412.05032", 
+    note = "https://github.com/cdalitz/moonboot/",
     textVersion  = paste("C. Dalitz, F. Lögler (",year,"). ",
-        "moonboot: ",
-        version," Niederrhein University of Applied Sciences, Institute for Pattern Recognition. Reinarzstr. 49, 47805 Krefeld, Germany. ",
+        "moonboot: An R Package Implementing m-out-of-n Bootstrap Methods. ",
+        "Preprint https://arxiv.org/abs/2412.05032. ",
         "https://github.com/cdalitz/moonboot/", sep = "")
-)
+    )

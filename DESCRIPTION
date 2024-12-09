@@ -5,8 +5,12 @@ Date: 2024-12-09
 Authors@R:
     c(person("Christoph", "Dalitz", email="christoph.dalitz@hs-niederrhein.de", role = c("aut", "cre")),person("Felix", "Lögler", role = c("aut")))
 Description:
-  Functions and examples based on the m-out-of-n bootstrap suggested by Politis and Romano (1994).
-  Additionally there are functions to estimate the convergence rate tau and the subsampling size m.
+  Functions and examples based on the m-out-of-n bootstrap suggested by
+  Politis, D.N. and Romano, J.P. (1994) <doi:10.1214/aos/1176325770>.
+  Additionally there are functions to estimate the scaling factor tau
+  and the subsampling size m. For a detailed description and a full list
+  of references, see Dalitz, C. and Lögler, F. (2024)
+  <doi:10.48550/arXiv.2412.05032>.
 License: BSD 2-clause License + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
