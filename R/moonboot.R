@@ -87,7 +87,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' data <- runif(1000)
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
 #' tau <- \(x){x} # convergence rate
-#' boot.out <- mboot(data, estimate.max, R = 1000, replace = FALSE)
+#' boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
 #' cis <- mboot.ci(boot.out, 0.95, tau, c("all"))
 #' ci.basic <- cis$basic
 #' print(ci.basic)
@@ -449,7 +449,7 @@ estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, 
 #' data <- runif(1000)
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
 #' estimated.tau <- estimate.tau(data, estimate.max)
-#' boot.out <- mboot(data, estimate.max, R = 1000, replace = FALSE)
+#' boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
 #' cis <- mboot.ci(boot.out, 0.95, estimated.tau, c("all"))
 #' ci.basic <- cis$basic
 #' print(ci.basic)
@@ -461,7 +461,8 @@ estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, 
 #' @references Politis D.N. et al. (1999)
 #' \emph{Subsampling}, Springer, New York.
 #' @references Dalitz, C, and Lögler, F. (2024)
-#' \emph{moonboot: An R Package Implementing m-out-of-n Bootstrap Methods}, Preprint arxiv.org
+#' \emph{moonboot: An R Package Implementing m-out-of-n Bootstrap Methods},
+#' <doi:10.48550/arXiv.2412.05032>
 #'
 #' @importFrom stats lm
 #' @importFrom stats coef

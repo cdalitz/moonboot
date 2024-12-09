@@ -43,7 +43,7 @@ The m-out-of-n Bootstrap without replacement, known as subsampling, was introduc
 \examples{
 data <- runif(1000)
 estimate.max <- function(data, indices) {return(max(data[indices]))}
-boot.out <- mboot(data, estimate.max, R = 1000, m = sqrt(length(data)), replace = FALSE)
+boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
 
 }
 \references{

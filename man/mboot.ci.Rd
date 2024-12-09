@@ -35,7 +35,7 @@ For the type \code{sherman}, \code{tau} is not needed and is therefore not calcu
 data <- runif(1000)
 estimate.max <- function(data, indices) {return(max(data[indices]))}
 tau <- \(x){x} # convergence rate
-boot.out <- mboot(data, estimate.max, R = 1000, replace = FALSE)
+boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
 cis <- mboot.ci(boot.out, 0.95, tau, c("all"))
 ci.basic <- cis$basic
 print(ci.basic)

@@ -51,7 +51,7 @@ The method 'quantile' averages over multiple quantile ranges Q and fits a linear
 data <- runif(1000)
 estimate.max <- function(data, indices) {return(max(data[indices]))}
 estimated.tau <- estimate.tau(data, estimate.max)
-boot.out <- mboot(data, estimate.max, R = 1000, replace = FALSE)
+boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
 cis <- mboot.ci(boot.out, 0.95, estimated.tau, c("all"))
 ci.basic <- cis$basic
 print(ci.basic)
@@ -65,7 +65,8 @@ Politis D.N. et al. (1999)
 \emph{Subsampling}, Springer, New York.
 
 Dalitz, C, and Lögler, F. (2024)
-\emph{moonboot: An R Package Implementing m-out-of-n Bootstrap Methods}, Preprint arxiv.org
+\emph{moonboot: An R Package Implementing m-out-of-n Bootstrap Methods},
+\url{doi:10.48550/arXiv.2412.05032}
 }
 \seealso{
 mboot.ci
