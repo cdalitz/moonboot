@@ -87,7 +87,7 @@ This parameter can be set using \code{params}.}}
 \examples{
 data <- runif(1000)
 estimate.max <- function(data, indices) {return(max(data[indices]))}
-tau <- \(x){x} # convergence rate
+tau <- function(n){n} # convergence rate (usually sqrt(n), but n for max) 
 choosen.m <- estimate.m(data, estimate.max, tau, R = 1000, method = "bickel")
 print(choosen.m)
 

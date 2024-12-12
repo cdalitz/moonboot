@@ -1,7 +1,7 @@
 Package: moonboot
 Title: m-Out-of-n Bootstrap Functions
 Version: 0.9.1
-Date: 2024-12-09
+Date: 2024-12-12
 Authors@R:
     c(person("Christoph", "Dalitz", email="christoph.dalitz@hs-niederrhein.de", role = c("aut", "cre")),person("Felix", "Lögler", role = c("aut")))
 Description:
@@ -16,8 +16,8 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports:
-    methods (>= 4.1.2),
-    stats   (>= 4.1.2)
+    methods (>= 3.5.0),
+    stats   (>= 3.5.0)
 Suggests:
-    testthat (>= 3.0.0)
+    testthat (>= 2.3.0)
 Config/testthat/edition: 3

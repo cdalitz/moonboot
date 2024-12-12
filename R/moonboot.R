@@ -86,7 +86,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' @examples
 #' data <- runif(1000)
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
-#' tau <- \(x){x} # convergence rate
+#' tau <- function(n){n} # convergence rate (usually sqrt(n), but n for max) 
 #' boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
 #' cis <- mboot.ci(boot.out, 0.95, tau, c("all"))
 #' ci.basic <- cis$basic
@@ -214,7 +214,7 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
 #' @examples
 #' data <- runif(1000)
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
-#' tau <- \(x){x} # convergence rate
+#' tau <- function(n){n} # convergence rate (usually sqrt(n), but n for max) 
 #' choosen.m <- estimate.m(data, estimate.max, tau, R = 1000, method = "bickel")
 #' print(choosen.m)
 #'
