@@ -13,7 +13,7 @@ Usage
 A typical usage is
 
     # application of estimator to the subset indices
-    boot.stat <- function(indices, dat) {
+    boot.stat <- function(dat, indices) {
       my.stat(dat[indices])
     }
 
