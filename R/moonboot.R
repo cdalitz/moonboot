@@ -5,11 +5,11 @@
 #' The subsample size m can either be chosen directly or estimated with [estimate.m()].
 #'
 #' @param data The data to be bootstrapped. If it is multidimensional, each row is considered as one observation passed to the \code{statistic}.
-#' @param statistic A function, returing the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
+#' @param statistic A function returing the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
 #' will be a vector of indicies. Any further arguments can be passed through the \code{...} argument.
-#' @param R The amount of bootstrap replicates.
-#' @param m The subsampling size, if not provided \code{sqrt(n)} is used.
-#' @param replace Whether sampling should be done with replacement or without replacement (the default)
+#' @param R The number of bootstrap replicates.
+#' @param m The subsampling size.
+#' @param replace Whether sampling should be done with replacement or without replacement (the default).
 #' @param ... Additional parameters to be passed to the \code{statistic}.
 #' @return The returned value is an object of the class \code{"mboot"} containing the following components:
 #' \itemize{
@@ -23,7 +23,9 @@
 #'
 #' @details
 #'
-#' \code{m} needs to be a numeric value meeting the condition \code{2<=m<=n}. If omitted, \code{m} is set to \code{sqrt(n)}.
+#' \code{m} needs to be a numeric value meeting the condition \code{2<=m<=n}.
+#' It must be chosen such that m goes to infinity as n goes to infinits,
+#' but the ratio m/n must go to zero.
 #' The m-out-of-n Bootstrap without replacement, known as subsampling, was introduced by Politis and Romano (1994).
 #' @importFrom methods hasArg
 #' @export
@@ -65,12 +67,12 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' m-Out-of-n Bootstrap Confidence Intervals
 #'
 #' Estimates the confidence interval using the methods provided by \code{types}.
-#' \code{tau} must be a function that calculates \code{tau.n} from its argument \code{n}.
-#' If it is not provided, it is estimated with \code{estimate.tau} using the default settings of this function.
+#' \code{tau} must be a function that calculates \code{tau.n} for a given \code{n}.
+#' If \code{tau} is not provided, it is estimated with \code{estimate.tau} using the default settings of this function.
 #'
 #' @param boot.out The simulated bootstrap distribution from the \code{mboot} call.
 #' @param conf The confidence level.
-#' @param tau Function that returns its only argument applied to tau. If \code{NULL}, \code{estimate.tau} is used to estimate \code{tau}.
+#' @param tau Function that returns the scaling factor tau in dependence of n. If \code{NULL}, \code{estimate.tau} is used to estimate \code{tau}.
 #' @param types The types of confidence intervals to be calculated. The value can be 'all' for all types, or a
 #' subset of \code{c("basic", "norm", "sherman")}.
 #' @param ... When \code{tau} is omitted, the additional parameters are passed to \code{statistic} when estimating \code{tau}.
@@ -81,7 +83,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' @details
 #' The additional parameters are passed to the statistic function if \code{tau} was omitted.
 #' To specify the arguments of the \code{estimate.tau}, call this function directly and use its return value as \code{tau} argument.
-#' For the type \code{sherman}, \code{tau} is not needed and is therefore not calculated.
+#' For the type \code{sherman}, \code{tau} is not needed and its value is in this case ignored.
 #'
 #' @examples
 #' data <- runif(1000)
