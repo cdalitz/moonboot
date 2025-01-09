@@ -1,9 +1,10 @@
 #' Mean of the Shorthest Half
 #'
 #' Calculates the mean of the data points in the shortest interval containing half of the data.
-#' This function is ready to be used as a statistic in [mboot()] function.
+#' The arguments of the function are such that it directly can be used as a
+#' statistic in the [mboot()] function.
 #'
-#' @param data the data as a vector.
+#' @param data the data as a numeric vector.
 #' @param indices the selected indices of \code{data}, by default \code{seq_along(data)}.
 #' @returns The mean of the data points in the shortest interval containing half of the data.
 #'

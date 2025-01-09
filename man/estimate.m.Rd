@@ -25,7 +25,7 @@ estimate.m(
 
 \item{R}{The amount of bootstrap replicates. Must be a positive integer.}
 
-\item{replace}{If the sampling should be done with replacement.}
+\item{replace}{If the sampling should be done with replacement. Setting this value to true requires a sufficient smooth estimator.}
 
 \item{min.m}{Minimum subsample size to be tried. Should be the minimum size for which the statistic make sense.}
 

@@ -7,7 +7,7 @@
 shorth(data, indices = NULL)
 }
 \arguments{
-\item{data}{the data as a vector.}
+\item{data}{the data as a numeric vector.}
 
 \item{indices}{the selected indices of \code{data}, by default \code{seq_along(data)}.}
 }
@@ -16,7 +16,8 @@ The mean of the data points in the shortest interval containing half of the data
 }
 \description{
 Calculates the mean of the data points in the shortest interval containing half of the data.
-This function is ready to be used as a statistic in \code{\link[=mboot]{mboot()}} function.
+The arguments of the function are such that it directly can be used as a
+statistic in the \code{\link[=mboot]{mboot()}} function.
 }
 \examples{
 data <- rnorm(100)

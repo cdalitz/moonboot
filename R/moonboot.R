@@ -37,7 +37,7 @@
 #' @seealso mboot.ci estimate.m estimate.tau
 #'
 #' @references Politis D.N. and Romano J.P. (1994) Large sample confidence regions
-#' based on subsamples under minimal assumptions \emph{The Annals of Statistics}, 22(4):2031-2050, doi:10.1214/aos/1176325770.
+#' based on subsamples under minimal assumptions. \emph{The Annals of Statistics}, 22(4):2031-2050, \doi{10.1214/aos/1176325770}
 #' @keywords ~htest ~nonparametric
 mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
   n <- NROW(data)
@@ -67,23 +67,37 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' m-Out-of-n Bootstrap Confidence Intervals
 #'
 #' Estimates the confidence interval using the methods provided by \code{types}.
-#' \code{tau} must be a function that calculates \code{tau.n} for a given \code{n}.
-#' If \code{tau} is not provided, it is estimated with \code{estimate.tau} using the default settings of this function.
+#' \code{tau} must be a function that calculates teh scaling factor
+#' tau(n) for a given n. If \code{tau} is not provided, it is estimated
+#' with \code{estimate.tau} using the default settings of this function.
 #'
 #' @param boot.out The simulated bootstrap distribution from the \code{mboot} call.
 #' @param conf The confidence level.
 #' @param tau Function that returns the scaling factor tau in dependence of n. If \code{NULL}, \code{estimate.tau} is used to estimate \code{tau}.
 #' @param types The types of confidence intervals to be calculated. The value can be 'all' for all types, or a
 #' subset of \code{c("basic", "norm", "sherman")}.
-#' @param ... When \code{tau} is omitted, the additional parameters are passed to \code{statistic} when estimating \code{tau}.
+#' @param ... When \code{tau} is omitted, the additional parameters are passed to \code{statistic} during estimation of \code{tau}.
 #'
 #' @returns A list of confidence intervals for the given types.
 #'
 #'
 #' @details
-#' The additional parameters are passed to the statistic function if \code{tau} was omitted.
-#' To specify the arguments of the \code{estimate.tau}, call this function directly and use its return value as \code{tau} argument.
-#' For the type \code{sherman}, \code{tau} is not needed and its value is in this case ignored.
+#' As estimating the scaling factor tau(n) can be unreliable, it is recommended
+#' to explicitly provide \code{tau}. Otherwise it is estimated with
+#' \code{estimate.tau}. To specify additional arguments for
+#' \code{estimate.tau}, call this function directly and use its return value
+#' as \code{tau} argument. For the type \code{sherman}, \code{tau} is not
+#' needed and its value is ignored.
+#' 
+#' The following methods to compute teh confidence intervals are supported
+#' through the parameter \code{type}:
+#' 
+#' \describe{\item{basic:}{
+#' This method works for all estimators and computes the interval directly from the quantiles of the m-out-of-n bootstrap distribution.}
+#' \item{norm:}{
+#' This method only works for normally distributed estimators. It estimates the variance with the m-out-of-n bootstrap and then computes te interval with the quantiles of teh standard normal distribution.}
+#' \item{sherman:}{
+#' This method does not scale the interval with tau(m)/tau(n) and thus is too wide. To avoid over-coverage, this is compensated by centering it randomly around the point estimators of one of the m-out-of-n bootstrap samples. Although this results on average in the nominal coverage probability, the interval is less accurate than the other intervals and should be used only as a last resort if the scaling factor tau is neither known, nor estimatable.}}
 #'
 #' @examples
 #' data <- runif(1000)
@@ -102,9 +116,10 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' @seealso mboot estimate.tau
 #'
 #' @references Politis D.N. and Romano J.P. (1994) Large sample confidence regions
-#' based on subsamples under minimal assumptions \emph{The Annals of Statistics}, 22(4):2031-2050, doi:10.1214/aos/1176325770.
+#' based on subsamples under minimal assumptions. \emph{The Annals of Statistics}, 22(4):2031-2050, \doi{10.1214/aos/1176325770}
 #' @references Sherman M. and Carlstein E. (2004) Confidence intervals based on estimators with unknown rates of convergence.
 #' \emph{Computional statistics & data analysis}, 46(1):123-136.
+#' @references Dalitz C. and Lögler M. (2024) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.48550/arXiv.2412.05032}
 #' @keywords ~htest
 #' @export
 mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
@@ -165,7 +180,7 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
 #' @param tau The convergence rate.
 #' @param R The amount of bootstrap replicates. Must be a positive integer.
 #' @param method The method to be used, one of \code{c("goetze","bickel","politis", "sherman")}.
-#' @param replace If the sampling should be done with replacement.
+#' @param replace If the sampling should be done with replacement. Setting this value to true requires a sufficient smooth estimator.
 #' @param min.m Minimum subsample size to be tried. Should be the minimum size for which the statistic make sense.
 #' @param params Additional parameters to be passed to the internal functions, see details for more information.
 #' @param ... Additional parameters to be passed to the statistic.
@@ -463,8 +478,8 @@ estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, 
 #' @references Politis D.N. et al. (1999)
 #' \emph{Subsampling}, Springer, New York.
 #' @references Dalitz, C, and Lögler, F. (2024)
-#' \emph{moonboot: An R Package Implementing m-out-of-n Bootstrap Methods},
-#' <doi:10.48550/arXiv.2412.05032>
+#' \emph{moonboot: An R Package Implementing m-out-of-n Bootstrap Methods}.
+#' \doi{10.48550/arXiv.2412.05032}
 #'
 #' @importFrom stats lm
 #' @importFrom stats coef

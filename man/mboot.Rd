@@ -9,14 +9,14 @@ mboot(data, statistic, m, R = 1000, replace = FALSE, ...)
 \arguments{
 \item{data}{The data to be bootstrapped. If it is multidimensional, each row is considered as one observation passed to the \code{statistic}.}
 
-\item{statistic}{A function, returing the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
+\item{statistic}{A function returing the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
 will be a vector of indicies. Any further arguments can be passed through the \code{...} argument.}
 
-\item{m}{The subsampling size, if not provided \code{sqrt(n)} is used.}
+\item{m}{The subsampling size.}
 
-\item{R}{The amount of bootstrap replicates.}
+\item{R}{The number of bootstrap replicates.}
 
-\item{replace}{Whether sampling should be done with replacement or without replacement (the default)}
+\item{replace}{Whether sampling should be done with replacement or without replacement (the default).}
 
 \item{...}{Additional parameters to be passed to the \code{statistic}.}
 }
@@ -37,7 +37,9 @@ Sampling can be done with or without replacement.
 The subsample size m can either be chosen directly or estimated with \code{\link[=estimate.m]{estimate.m()}}.
 }
 \details{
-\code{m} needs to be a numeric value meeting the condition \code{2<=m<=n}. If omitted, \code{m} is set to \code{sqrt(n)}.
+\code{m} needs to be a numeric value meeting the condition \code{2<=m<=n}.
+It must be chosen such that m goes to infinity as n goes to infinits,
+but the ratio m/n must go to zero.
 The m-out-of-n Bootstrap without replacement, known as subsampling, was introduced by Politis and Romano (1994).
 }
 \examples{
@@ -48,7 +50,7 @@ boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace 
 }
 \references{
 Politis D.N. and Romano J.P. (1994) Large sample confidence regions
-based on subsamples under minimal assumptions \emph{The Annals of Statistics}, 22(4):2031-2050, doi:10.1214/aos/1176325770.
+based on subsamples under minimal assumptions. \emph{The Annals of Statistics}, 22(4):2031-2050, \doi{10.1214/aos/1176325770}
 }
 \seealso{
 mboot.ci estimate.m estimate.tau
