@@ -44,11 +44,15 @@ it with
 
     R CMD INSTALL moonboot-X.Y.Z.tar.gz
 
+If you want to remove the already installed package, you can uninstall it with
+
+    R CMD REMOVE moonboot
+
 
 Reference
 ---------
 
-For details about the implemented methods and a comprative evaluation, see
+For details about the implemented methods and a comparative evaluation, see
 
 > Dalitz C. and Lögler M. (2024):
 > "moonboot: An R Package Implementing m-out-of-n Bootstrap Methods."
