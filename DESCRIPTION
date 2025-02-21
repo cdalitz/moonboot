@@ -1,6 +1,6 @@
 Package: moonboot
 Title: m-Out-of-n Bootstrap Functions
-Version: 1.0.0
+Version: 1.0.1
 Date: 2025-02-21
 Authors@R:
     c(person("Christoph", "Dalitz", email="christoph.dalitz@hs-niederrhein.de", role = c("aut", "cre")),person("Felix", "Lögler", role = c("aut")))
