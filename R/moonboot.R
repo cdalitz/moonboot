@@ -203,7 +203,7 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
 #' As distance measurement the 'Kolmogorov distance' is used.
 #' The method uses the pairs 'm' and 'm/2' to be minimized.
 #' As this would involve trying out all combinations of 'm' and 'm/2' this method has a running time of order Rn^2.
-#' To reduce the runtime in practical use, \code{params} can be used to pass a \code{search.value}, which is a
+#' To reduce the runtime in practical use, \code{params} can be used to pass a \code{goetze.interval}, which is a
 #' list of the smallest and largest value for m to try.}
 #' \item{bickel:}{
 #' This method works similary to the previous one. The difference here is that the subsample sizes to be
@@ -272,7 +272,7 @@ estimate.m <- function(data, statistic, tau = NULL, R = 1000, replace = FALSE, m
 
 estimate.m.goetze <- function(data, statistic, tau, R, replace = FALSE, min.m, params, ...) {
   n <- NROW(data)
-  params.default.values <- list(goetze.interval = c(2, n))
+  params.default.values <- list(goetze.interval = c(4, n))
 
   if (!hasArg(params) || is.null(params)) {
     params <- params.default.values
@@ -291,13 +291,12 @@ estimate.m.goetze <- function(data, statistic, tau, R, replace = FALSE, min.m, p
   t0 <- statistic(data, 1:n, ...)
 
   # Calculate the distance between m and m/2
-  calcDistance <- function(m) {
-    m.half <- ceiling(m / 2)
+  calcDistance <- function(bout.m, bout.mh) {
+    m <- bout.m$m
+    m.half <- bout.mh$m
 
-    bout <- mboot(data, statistic, R, m = m, replace = replace, ...)
-    m.t <- bout$t
-    bout.m.half <- mboot(data, statistic, R, m = m.half, replace = replace, ...)
-    mh.t <- bout.m.half$t
+    m.t <- bout.m$t
+    mh.t <- bout.mh$t
 
     m.t <- tau(m) * (m.t - t0)
     mh.t <- tau(m.half) * (mh.t - t0)
@@ -309,13 +308,20 @@ estimate.m.goetze <- function(data, statistic, tau, R, replace = FALSE, min.m, p
   }
 
   # using an (optional) search interval to speed up the process
-  a <- max(min.m + min.m %% 2, goetze.interval[1]) # limiting search interval to min.m
-  b <- min(n / 2, goetze.interval[2])
+  a <- max(2 * min.m, goetze.interval[1] + goetze.interval[1] %% 2) # limiting search interval to min.m
+  b <- min(n, goetze.interval[2])
   # filtering m values which are not in the search interval
-  m.values <- 2 * seq(a - (a %% 2), b + (a %% 2), by = 2)
-  m.values <- m.values[m.values >= min.m]
+  m.values <- seq(a, b, by = 2)
+  m.values <- m.values[m.values >= 2 * min.m] # it is needed to calculate m/2, therefore m needs to be at least 2*min.m
   m.values <- m.values[m.values <= n]
-  distances <- sapply(m.values, calcDistance)
+  required.m.values <- unique(c(m.values, ceiling(m.values / 2)))
+  required.m.values <- sort(required.m.values)
+  required.boots <- lapply(required.m.values, function(m)
+    mboot(data, statistic, R, m = m, replace = replace, ...))
+  # iterate over m.values and calculate distances between corresponding required.boots m and m/2.
+  distances <- sapply(m.values, function(m)
+    calcDistance(required.boots[[which(required.m.values == m)]], required.boots[[which(required.m.values == ceiling(m / 2))]]))
+
   m <- m.values[which.min(distances)]
   return(m)
 }
