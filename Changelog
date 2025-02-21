@@ -1,12 +1,17 @@
 Changelog for moonboot
 ======================
 
-- now works with R versions >= 3.5.0
+Version 1.0.0 from 2025-02-21
+=============================
 
-- some corrections in documentation
+ - now works with R versions >= 3.5.0
+
+ - some corrections in documentation
+
+ - method="goetze" in estimate.m() now slightly faster (by 1/4)
 
 
 Version 0.9.1 from 2024-12-09
 =============================
 
-- first release
+ - first release
