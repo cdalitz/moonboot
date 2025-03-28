@@ -5,7 +5,7 @@
 #' \code{(pow+1)*(x-min)^pow/(max-min)^(pow+1)} for \code{x}
 #' in the range \code{[min,max]} and \code{pow > -1}.
 #' 
-#' @param x vector of values where to evaluate the denisty or CDF.
+#' @param x vector of values where to evaluate the density or CDF.
 #' @param p vector of probabilities.
 #' @param pow degree of the power law.
 #' @param n number of observations. If \code{length(n) > 1}, the length is taken to be the number required.

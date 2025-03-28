@@ -17,7 +17,7 @@ qpower(p, pow, min = 0, max = 1)
 rpower(n, pow, min = 0, max = 1)
 }
 \arguments{
-\item{x}{vector of values where to evaluate the denisty or CDF.}
+\item{x}{vector of values where to evaluate the density or CDF.}
 
 \item{pow}{degree of the power law.}
 

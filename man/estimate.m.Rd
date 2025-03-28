@@ -59,7 +59,7 @@ CDF of the bootstrap distributions of different subsampling sizes 'm'.
 As distance measurement the 'Kolmogorov distance' is used.
 The method uses the pairs 'm' and 'm/2' to be minimized.
 As this would involve trying out all combinations of 'm' and 'm/2' this method has a running time of order Rn^2.
-To reduce the runtime in practical use, \code{params} can be used to pass a \code{search.value}, which is a
+To reduce the runtime in practical use, \code{params} can be used to pass a \code{goetze.interval}, which is a
 list of the smallest and largest value for m to try.}
 \item{bickel:}{
 This method works similary to the previous one. The difference here is that the subsample sizes to be
