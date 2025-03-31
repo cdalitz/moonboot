@@ -9,8 +9,8 @@ mboot(data, statistic, m, R = 1000, replace = FALSE, ...)
 \arguments{
 \item{data}{The data to be bootstrapped. If it is multidimensional, each row is considered as one observation passed to the \code{statistic}.}
 
-\item{statistic}{A function returing the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
-will be a vector of indicies. Any further arguments can be passed through the \code{...} argument.}
+\item{statistic}{A function returning the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
+will be a vector of indices. Any further arguments can be passed through the \code{...} argument.}
 
 \item{m}{The subsampling size.}
 

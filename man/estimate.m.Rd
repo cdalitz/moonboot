@@ -19,7 +19,8 @@ estimate.m(
 \arguments{
 \item{data}{The data to be bootstrapped.}
 
-\item{statistic}{The estimator of the parameter.}
+\item{statistic}{A function returning the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
+will be a vector of indices. Any further arguments can be passed through the \code{...} argument.}
 
 \item{tau}{The convergence rate.}
 

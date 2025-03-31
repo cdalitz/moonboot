@@ -23,7 +23,7 @@ A list of confidence intervals for the given types.
 }
 \description{
 Estimates the confidence interval using the methods provided by \code{types}.
-\code{tau} must be a function that calculates teh scaling factor
+\code{tau} must be a function that calculates the scaling factor
 tau(n) for a given n. If \code{tau} is not provided, it is estimated
 with \code{estimate.tau} using the default settings of this function.
 }
@@ -35,7 +35,7 @@ to explicitly provide \code{tau}. Otherwise it is estimated with
 as \code{tau} argument. For the type \code{sherman}, \code{tau} is not
 needed and its value is ignored.
 
-The following methods to compute teh confidence intervals are supported
+The following methods to compute the confidence intervals are supported
 through the parameter \code{type}:
 
 \describe{\item{basic:}{
@@ -62,7 +62,7 @@ based on subsamples under minimal assumptions. \emph{The Annals of Statistics}, 
 Sherman M. and Carlstein E. (2004) Confidence intervals based on estimators with unknown rates of convergence.
 \emph{Computional statistics & data analysis}, 46(1):123-136.
 
-Dalitz C. and Lögler M. (2024) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.48550/arXiv.2412.05032}
+Dalitz C. and Lögler F. (2024) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.48550/arXiv.2412.05032}
 }
 \seealso{
 mboot estimate.tau

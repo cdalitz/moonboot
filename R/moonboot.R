@@ -5,8 +5,8 @@
 #' The subsample size m can either be chosen directly or estimated with [estimate.m()].
 #'
 #' @param data The data to be bootstrapped. If it is multidimensional, each row is considered as one observation passed to the \code{statistic}.
-#' @param statistic A function returing the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
-#' will be a vector of indicies. Any further arguments can be passed through the \code{...} argument.
+#' @param statistic A function returning the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
+#' will be a vector of indices. Any further arguments can be passed through the \code{...} argument.
 #' @param R The number of bootstrap replicates.
 #' @param m The subsampling size.
 #' @param replace Whether sampling should be done with replacement or without replacement (the default).
@@ -67,7 +67,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' m-Out-of-n Bootstrap Confidence Intervals
 #'
 #' Estimates the confidence interval using the methods provided by \code{types}.
-#' \code{tau} must be a function that calculates teh scaling factor
+#' \code{tau} must be a function that calculates the scaling factor
 #' tau(n) for a given n. If \code{tau} is not provided, it is estimated
 #' with \code{estimate.tau} using the default settings of this function.
 #'
@@ -89,7 +89,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' as \code{tau} argument. For the type \code{sherman}, \code{tau} is not
 #' needed and its value is ignored.
 #' 
-#' The following methods to compute teh confidence intervals are supported
+#' The following methods to compute the confidence intervals are supported
 #' through the parameter \code{type}:
 #' 
 #' \describe{\item{basic:}{
@@ -119,7 +119,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' based on subsamples under minimal assumptions. \emph{The Annals of Statistics}, 22(4):2031-2050, \doi{10.1214/aos/1176325770}
 #' @references Sherman M. and Carlstein E. (2004) Confidence intervals based on estimators with unknown rates of convergence.
 #' \emph{Computional statistics & data analysis}, 46(1):123-136.
-#' @references Dalitz C. and Lögler M. (2024) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.48550/arXiv.2412.05032}
+#' @references Dalitz C. and Lögler F. (2024) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.48550/arXiv.2412.05032}
 #' @keywords ~htest
 #' @export
 mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
@@ -176,7 +176,8 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
 #' It is also possible to pass parameters to the statistic using '...'.
 #'
 #' @param data The data to be bootstrapped.
-#' @param statistic The estimator of the parameter.
+#' @param statistic A function returning the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
+#' will be a vector of indices. Any further arguments can be passed through the \code{...} argument.
 #' @param tau The convergence rate.
 #' @param R The amount of bootstrap replicates. Must be a positive integer.
 #' @param method The method to be used, one of \code{c("goetze","bickel","politis", "sherman")}.
@@ -450,7 +451,8 @@ estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, 
 #' and returns it as a function of the form \code{tau_n = n^a}, where \code{n} is the input parameter.
 #'
 #' @param data The data to be bootstrapped.
-#' @param statistic The estimator of the parameter.
+#' @param statistic A function returning the statistic of interest. It must take two arguments. The first argument passed will be the original data, the second
+#' will be a vector of indices. Any further arguments can be passed through the \code{...} argument.
 #' @param R Amount of bootstrap replicates used to estimate tau.
 #' @param replace If sampling should be done with replacement.
 #' @param min.m Minimal subsampling size used to estimate tau. Should be set to the minimum size for which the statistic makes sense.
