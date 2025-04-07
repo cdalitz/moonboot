@@ -137,7 +137,7 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
     if (!is.function(tau))
       stop("tau must be a function")
     # plausi check: tau(n) -> infty for n -> infty?
-    if (tau(20) < tau(10)) {
+    if (tau(20) <= tau(10)) {
       warning("tau(n) does not increase in n => m-out-of-n bootstrap might not work")
     } else if (tau(20)/tau(10) < 2^0.05) {
       warning("suspicious slow increase of tau(n) => m-out-of-n bootstrap might not work")
