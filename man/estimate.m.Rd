@@ -81,15 +81,15 @@ This method is based on a 'double-bootstrap' approach.
 It tries to estimate the coverage error of different subsampling sizes and chooses the subsampling
 size with the lowest one.
 As estimating the coverage error is highly computationally intensive, it is not practical to try all m values.
-Therefore, the \code{beta} parameter can be used to control which \code{m} values are tried. The values
-are then calculated by \code{ms = n^beta}. The default value is a sequence between 0.3 and 0.9 out of 15 values.
+Therefore, the \code{gamma} parameter can be used to control which \code{m} values are tried. The values
+are then calculated by \code{ms = n^gamma}. The default value is a sequence between 0.3 and 0.9 out of 15 values.
 This parameter can be set using \code{params}.}}
 }
 \examples{
 data <- runif(1000)
 estimate.max <- function(data, indices) {return(max(data[indices]))}
 tau <- function(n){n} # convergence rate (usually sqrt(n), but n for max) 
-choosen.m <- estimate.m(data, estimate.max, tau, R = 1000, method = "bickel")
+choosen.m <- estimate.m(data, estimate.max, tau=tau, R = 1000, method = "bickel")
 print(choosen.m)
 
 

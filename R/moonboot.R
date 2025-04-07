@@ -104,7 +104,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
 #' tau <- function(n){n} # convergence rate (usually sqrt(n), but n for max) 
 #' boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
-#' cis <- mboot.ci(boot.out, 0.95, tau, c("all"))
+#' cis <- mboot.ci(boot.out, conf=0.95, tau=tau, types=c("all"))
 #' ci.basic <- cis$basic
 #' print(ci.basic)
 #'
@@ -133,9 +133,16 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
 
   if ("basic" %in% types | "norm" %in% types) { # tau is not needed if sherman is the only type
     if (is.null(tau))
-      tau <- estimate.tau(boot.out$data, boot.out$statistic, R = 1000, replace = FALSE, ...)
+      tau <- estimate.tau(boot.out$data, boot.out$statistic, R = 1000, replace = boot.out$replace, ...)
     if (!is.function(tau))
       stop("tau must be a function")
+    # plausi check: tau(n) -> infty for n -> infty?
+    if (tau(20) < tau(10)) {
+      warning("tau(n) does not increase in n => m-out-of-n bootstrap might not work")
+    } else if (tau(20)/tau(10) < 2^0.05) {
+      warning("suspicious slow increase of tau(n) => m-out-of-n bootstrap might not work")
+    }
+
   }
   alpha <- 1 - conf
 
@@ -225,15 +232,15 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
 #' It tries to estimate the coverage error of different subsampling sizes and chooses the subsampling
 #' size with the lowest one.
 #' As estimating the coverage error is highly computationally intensive, it is not practical to try all m values.
-#' Therefore, the \code{beta} parameter can be used to control which \code{m} values are tried. The values
-#' are then calculated by \code{ms = n^beta}. The default value is a sequence between 0.3 and 0.9 out of 15 values.
+#' Therefore, the \code{gamma} parameter can be used to control which \code{m} values are tried. The values
+#' are then calculated by \code{ms = n^gamma}. The default value is a sequence between 0.3 and 0.9 out of 15 values.
 #' This parameter can be set using \code{params}.}}
 #'
 #' @examples
 #' data <- runif(1000)
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
 #' tau <- function(n){n} # convergence rate (usually sqrt(n), but n for max) 
-#' choosen.m <- estimate.m(data, estimate.max, tau, R = 1000, method = "bickel")
+#' choosen.m <- estimate.m(data, estimate.max, tau=tau, R = 1000, method = "bickel")
 #' print(choosen.m)
 #'
 #'
@@ -254,7 +261,7 @@ mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
 
 estimate.m <- function(data, statistic, tau = NULL, R = 1000, replace = FALSE, min.m = 3, method = "bickel", params = NULL, ...) {
   if (is.null(tau) & method != "sherman") {
-    tau <- estimate.tau(data, statistic, R = 1000, replace = FALSE, ...)
+    tau <- estimate.tau(data, statistic, R = 1000, replace = replace, ...)
   }
 
   if ("goetze" == method) {
@@ -456,15 +463,15 @@ estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, 
 #' @param R Amount of bootstrap replicates used to estimate tau.
 #' @param replace If sampling should be done with replacement.
 #' @param min.m Minimal subsampling size used to estimate tau. Should be set to the minimum size for which the statistic makes sense.
-#' @param beta The tested subsample sizes m are \code{n^beta}.
+#' @param gamma The tested subsample sizes m are \code{n^gamma}.
 #' @param method Method to estimate tau, can be one of \code{c("variance", "quantile")}.
 #' @param ... Additional parameters to be passed to the \code{mboot} function.
 #'
 #' @return A function for the square root of the convergence rate of the variance, i.e., \code{f(n) = tau_n}. This function can directly be passed to \code{mboot.ci}.
 #'
 #' @details There are two methods to choose from, \code{variance} and \code{quantile}.
-#' The provided \code{beta} values are used to select subsample sizes \code{m} by using \code{ms = n^beta}.
-#' Note that the choice of the \code{beta} values can impact the accuracy of the estimated \code{tau} (Dalitz & Lögler, 2024).
+#' The provided \code{gamma} values are used to select subsample sizes \code{m} by using \code{ms = n^gamma}.
+#' Note that the choice of the \code{gamma} values can impact the accuracy of the estimated \code{tau} (Dalitz & Lögler, 2024).
 #' For each selected subsample size \code{m} a bootstrap with \code{R} replications is performed.
 #' The method 'variance' then fits a linear function to log(variance) of the bootstrap statistics as function of log(m).
 #' The method 'quantile' averages over multiple quantile ranges Q and fits a linear function to log(Q) as a function of log(m).
@@ -475,7 +482,7 @@ estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, 
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
 #' estimated.tau <- estimate.tau(data, estimate.max)
 #' boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
-#' cis <- mboot.ci(boot.out, 0.95, estimated.tau, c("all"))
+#' cis <- mboot.ci(boot.out, conf=0.95, tau=estimated.tau, types=c("all"))
 #' ci.basic <- cis$basic
 #' print(ci.basic)
 #'
@@ -492,20 +499,20 @@ estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, 
 #' @importFrom stats lm
 #' @importFrom stats coef
 #' @export
-estimate.tau <- function(data, statistic, R = 1000, replace = FALSE, min.m = 3, beta = seq(0.2, 0.7, length.out = 5), method = "variance", ...) {
+estimate.tau <- function(data, statistic, R = 1000, replace = FALSE, min.m = 3, gamma = seq(0.2, 0.7, length.out = 5), method = "variance", ...) {
   if ("variance" == method) {
-    return(estimate.tau.variance(data, statistic, R = R, replace = replace, min.m = min.m, beta = beta, ...))
+    return(estimate.tau.variance(data, statistic, R = R, replace = replace, min.m = min.m, gamma = gamma, ...))
   }else if ("quantile" == method) {
-    return(estimate.tau.quantile(data, statistic, R = R, replace = replace, min.m = min.m, bs = beta, ...))
+    return(estimate.tau.quantile(data, statistic, R = R, replace = replace, min.m = min.m, gamma = gamma, ...))
   }
 }
 
 # Estimates tau using the variance method suggested by Bertail et al. (1999)
-estimate.tau.variance <- function(data, statistic, R = 1000, replace = FALSE, min.m, beta = seq(0.2, 0.7, length.out = 5), ...) {
+estimate.tau.variance <- function(data, statistic, R = 1000, replace = FALSE, min.m, gamma = seq(0.2, 0.7, length.out = 5), ...) {
   n <- NROW(data)
-  beta <- pmin(1, pmax(0, beta)) # force them to be in bounds
+  gamma <- pmin(1, pmax(0, gamma)) # force them to be in bounds
   # b from the paper is called m for consistency with the rest of the code
-  m <- n^beta
+  m <- n^gamma
   m <- m[m >= min.m]
   m.boots <- lapply(m, function(m) mboot(data, statistic, R = R, m = ceiling(m), replace = replace, ...))
   V.m <- lapply(m.boots, function(boot) var(boot$t))
@@ -518,10 +525,9 @@ estimate.tau.variance <- function(data, statistic, R = 1000, replace = FALSE, mi
 }
 
 # Estimate tau using the method suggested by Polits et al. (1999).
-estimate.tau.quantile <- function(data, statistic, R = 1000, replace = FALSE, min.m, bs, ...) {
+estimate.tau.quantile <- function(data, statistic, R = 1000, replace = FALSE, min.m, gamma = seq(0.2, 0.7, length.out=5), ...) {
   n <- NROW(data)
   J <- 5
-  I <- 5
   j <- seq(1, J, by = 1)
   t <- numeric(2 * J)
 
@@ -531,9 +537,7 @@ estimate.tau.quantile <- function(data, statistic, R = 1000, replace = FALSE, mi
     t[2 * i] <- seq.one[i]
     t[2 * i - 1] <- seq.two[i]
   }
-  if (!hasArg(bs))
-    bs <- seq(0.2, 0.7, length.out = I)
-  ms <- floor(n^bs)
+  ms <- floor(n^gamma)
   ms <- unique(ms)
   ms <- ms[ms >= min.m & ms <= n]
   I <- length(ms)

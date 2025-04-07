@@ -10,7 +10,7 @@ estimate.tau(
   R = 1000,
   replace = FALSE,
   min.m = 3,
-  beta = seq(0.2, 0.7, length.out = 5),
+  gamma = seq(0.2, 0.7, length.out = 5),
   method = "variance",
   ...
 )
@@ -27,7 +27,7 @@ will be a vector of indices. Any further arguments can be passed through the \co
 
 \item{min.m}{Minimal subsampling size used to estimate tau. Should be set to the minimum size for which the statistic makes sense.}
 
-\item{beta}{The tested subsample sizes m are \code{n^beta}.}
+\item{gamma}{The tested subsample sizes m are \code{n^gamma}.}
 
 \item{method}{Method to estimate tau, can be one of \code{c("variance", "quantile")}.}
 
@@ -42,8 +42,8 @@ and returns it as a function of the form \code{tau_n = n^a}, where \code{n} is t
 }
 \details{
 There are two methods to choose from, \code{variance} and \code{quantile}.
-The provided \code{beta} values are used to select subsample sizes \code{m} by using \code{ms = n^beta}.
-Note that the choice of the \code{beta} values can impact the accuracy of the estimated \code{tau} (Dalitz & Lögler, 2024).
+The provided \code{gamma} values are used to select subsample sizes \code{m} by using \code{ms = n^gamma}.
+Note that the choice of the \code{gamma} values can impact the accuracy of the estimated \code{tau} (Dalitz & Lögler, 2024).
 For each selected subsample size \code{m} a bootstrap with \code{R} replications is performed.
 The method 'variance' then fits a linear function to log(variance) of the bootstrap statistics as function of log(m).
 The method 'quantile' averages over multiple quantile ranges Q and fits a linear function to log(Q) as a function of log(m).
@@ -53,7 +53,7 @@ data <- runif(1000)
 estimate.max <- function(data, indices) {return(max(data[indices]))}
 estimated.tau <- estimate.tau(data, estimate.max)
 boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
-cis <- mboot.ci(boot.out, 0.95, estimated.tau, c("all"))
+cis <- mboot.ci(boot.out, conf=0.95, tau=estimated.tau, types=c("all"))
 ci.basic <- cis$basic
 print(ci.basic)
 

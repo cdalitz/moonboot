@@ -50,7 +50,7 @@ data <- runif(1000)
 estimate.max <- function(data, indices) {return(max(data[indices]))}
 tau <- function(n){n} # convergence rate (usually sqrt(n), but n for max) 
 boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
-cis <- mboot.ci(boot.out, 0.95, tau, c("all"))
+cis <- mboot.ci(boot.out, conf=0.95, tau=tau, types=c("all"))
 ci.basic <- cis$basic
 print(ci.basic)
 

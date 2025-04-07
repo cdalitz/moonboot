@@ -7,6 +7,7 @@ This is an R package for m-out-of-n bootstrap that provides functions for
 - estimation of the scaling factor tau
 - different methods for estimating m
 
+
 Usage
 -----
 

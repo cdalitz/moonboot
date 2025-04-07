@@ -1,6 +1,16 @@
 Changelog for moonboot
 ======================
 
+Version 2.0.0 from 2025-04-07
+=============================
+
+  - mboot.ci() now gives warning if tau(n) apparently violates conditions
+    for the m-out-of-n bootstrap (suggested by R Journal reviewer)
+
+  - parameter beta in estimate.m() functions renamed to gamma to avoid
+    confusion (suggested by R Journal reviewer)
+
+
 Version 1.0.1 from 2025-02-21
 =============================
 

@@ -2,7 +2,7 @@
 
 # double bootstrap approach to choose a m value
 estimate.m.sherman <- function(data, statistic, R = 1000, replace = FALSE, min.m, params, ...) {
-  params.default.values <- list(beta = seq(0.3, 0.9, length.out = 15), conf = 0.95)
+  params.default.values <- list(gamma = seq(0.3, 0.9, length.out = 15), conf = 0.95)
 
   if (!hasArg(params) | is.null(params)) {
     params <- params.default.values
@@ -15,12 +15,12 @@ estimate.m.sherman <- function(data, statistic, R = 1000, replace = FALSE, min.m
     warning(paste("estimate.m.sherman: The following parameters are unknown and will be ignored: ", paste(unexpected.params, collapse = ", ")))
   }
   # min, max value of search interval
-  beta <- if ("beta" %in% names(params)) params[["beta"]] else params.default.values[["beta"]]
+  gamma <- if ("gamma" %in% names(params)) params[["gamma"]] else params.default.values[["gamma"]]
   conf <- if ("conf" %in% names(params)) params[["conf"]] else params.default.values[["conf"]]
 
   threshold <- 0.05
   n <- NROW(data)
-  ms <- round(n^beta)
+  ms <- round(n^gamma)
   ms <- unique(ms)
   ms <- ms[ms > min.m & ms < n]
   model.point.est <- statistic(data, 1:n)
