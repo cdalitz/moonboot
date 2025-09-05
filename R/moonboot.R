@@ -100,14 +100,22 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' This method does not scale the interval with tau(m)/tau(n) and thus is too wide. To avoid over-coverage, this is compensated by centering it randomly around the point estimators of one of the m-out-of-n bootstrap samples. Although this results on average in the nominal coverage probability, the interval is less accurate than the other intervals and should be used only as a last resort if the scaling factor tau is neither known, nor estimatable.}}
 #'
 #' @examples
+#' # statistic for univariate data: maximum
 #' data <- runif(1000)
 #' estimate.max <- function(data, indices) {return(max(data[indices]))}
 #' tau <- function(n){n} # convergence rate (usually sqrt(n), but n for max) 
 #' boot.out <- mboot(data, estimate.max, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
-#' cis <- mboot.ci(boot.out, conf=0.95, tau=tau, types=c("all"))
-#' ci.basic <- cis$basic
-#' print(ci.basic)
+#' cis <- mboot.ci(boot.out, conf=0.95, tau=tau, types=c("basic","norm"))
+#' print(cis$basic)
 #'
+#' # statistic for multivariate data: correlation
+#' data <- data.frame(x = runif(1000))
+#' data$y <- data$x + runif(1000)
+#' estimate.cor <- function(data, indices) {return(cor(data$x[indices],data$y[indices]))}
+#' boot.out <- mboot(data, estimate.cor, R = 1000, m = 2*sqrt(NROW(data)), replace = FALSE)
+#' cis <- mboot.ci(boot.out, conf=0.95, tau=sqrt, types=c("basic","norm"))
+#' print(cis$basic)
+#' 
 #' @importFrom stats quantile
 #' @importFrom stats var
 #' @importFrom stats ecdf
