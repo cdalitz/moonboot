@@ -55,9 +55,10 @@ Reference
 
 For details about the implemented methods and a comparative evaluation, see
 
-> Dalitz C. and Lögler F. (2024):
+> Dalitz C. and Lögler F. (2025):
 > "moonboot: An R Package Implementing m-out-of-n Bootstrap Methods."
-> https://doi.org/10.48550/arXiv.2412.05032
+> The R Journal 17/3, pp. 125-137
+> https://doi.org/10.32614/RJ-2025-031
 
 
 Authors & Copyright

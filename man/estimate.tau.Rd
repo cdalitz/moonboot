@@ -65,9 +65,9 @@ Bertail P. et al. (1999) On subsampling estimators with unknown rate of converge
 Politis D.N. et al. (1999)
 \emph{Subsampling}, Springer, New York.
 
-Dalitz, C, and Lögler, F. (2024)
+Dalitz, C, and Lögler, F. (2025)
 \emph{moonboot: An R Package Implementing m-out-of-n Bootstrap Methods}.
-\doi{10.48550/arXiv.2412.05032}
+\doi{10.32614/RJ-2025-031}
 }
 \seealso{
 mboot.ci

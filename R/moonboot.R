@@ -127,7 +127,7 @@ mboot <- function(data, statistic, m, R = 1000, replace = FALSE, ...) {
 #' based on subsamples under minimal assumptions. \emph{The Annals of Statistics}, 22(4):2031-2050, \doi{10.1214/aos/1176325770}
 #' @references Sherman M. and Carlstein E. (2004) Confidence intervals based on estimators with unknown rates of convergence.
 #' \emph{Computional statistics & data analysis}, 46(1):123-136.
-#' @references Dalitz C. and Lögler F. (2024) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.48550/arXiv.2412.05032}
+#' @references Dalitz C. and Lögler F. (2025) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.32614/RJ-2025-031}
 #' @keywords ~htest
 #' @export
 mboot.ci <- function(boot.out, conf = 0.95, tau = NULL, types = "all", ...) {
@@ -500,9 +500,9 @@ estimate.m.politis <- function(data, statistic, tau, R, replace = FALSE, min.m, 
 #' \emph{Journal of the American Statistical Association}, 94(446):568-579.
 #' @references Politis D.N. et al. (1999)
 #' \emph{Subsampling}, Springer, New York.
-#' @references Dalitz, C, and Lögler, F. (2024)
+#' @references Dalitz, C, and Lögler, F. (2025)
 #' \emph{moonboot: An R Package Implementing m-out-of-n Bootstrap Methods}.
-#' \doi{10.48550/arXiv.2412.05032}
+#' \doi{10.32614/RJ-2025-031}
 #'
 #' @importFrom stats lm
 #' @importFrom stats coef

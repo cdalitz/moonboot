@@ -1,11 +1,13 @@
 citHeader("To cite the 'moonboot' package in publications use:")
-bibentry(bibtype = "misc",
+bibentry(bibtype = "article",
     title = "moonboot: An R Package Implementing m-out-of-n Bootstrap Methods",
     author = c(person("Christoph", "Dalitz"), person("Felix", "Lögler")),
-    year = "2024",
-    eprint = "2412.05032",
-    archivePrefix = "arXiv",
-    primaryClass = "stat.ME",
-    url = "https://arxiv.org/abs/2412.05032", 
-    note = "https://github.com/cdalitz/moonboot/",
+    year = "2025",
+    journal = "The R Journal",
+    doi = "10.32614/RJ-2025-031",
+    volume = "17",
+    issue = "3",
+    issn = "2073-4859",
+    pages = "125-137",
+    note = "https://github.com/cdalitz/moonboot/"
     )

@@ -70,7 +70,7 @@ based on subsamples under minimal assumptions. \emph{The Annals of Statistics}, 
 Sherman M. and Carlstein E. (2004) Confidence intervals based on estimators with unknown rates of convergence.
 \emph{Computional statistics & data analysis}, 46(1):123-136.
 
-Dalitz C. and Lögler F. (2024) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.48550/arXiv.2412.05032}
+Dalitz C. and Lögler F. (2025) moonboot: An R Package Implementing m-out-of-n Bootstrap Methods \doi{10.32614/RJ-2025-031}
 }
 \seealso{
 mboot estimate.tau

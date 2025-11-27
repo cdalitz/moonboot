@@ -1,8 +1,13 @@
 Changelog for moonboot
 ======================
 
+Version 2.0.1 from 2025-11-27
+=============================
+
  - example for mboot.ci() added for indexing multivariate data
    (suggested by R Journal reviewer)
+
+ - reference changed from arXiv preprint to R Journal article
 
 
 Version 2.0.0 from 2025-04-07
