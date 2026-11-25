@@ -8,7 +8,7 @@
 BUILDDIR=build
 
 mkdir $BUILDDIR
-rsync -av ./ $BUILDDIR/ --exclude $BUILDDIR --exclude makecrandist.sh
+rsync -av ./ $BUILDDIR/ --exclude $BUILDDIR --exclude makecrandist.sh --exclude moonboot-r-journal-2025.pdf
 mv $BUILDDIR/lic_cran $BUILDDIR/LICENSE
 R CMD build $BUILDDIR
 rm -rf $BUILDDIR
